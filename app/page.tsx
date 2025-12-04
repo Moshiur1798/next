@@ -1,3 +1,68 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "MyWebsite - Modern Web Solutions | Home",
+  description: "Discover amazing content and explore our beautiful, modern website built with Next.js and Tailwind CSS. Fast performance, stunning design, and fully responsive.",
+  keywords: [
+    "Next.js",
+    "React",
+    "Tailwind CSS",
+    "modern web design",
+    "responsive website",
+    "web development",
+    "fast performance",
+    "beautiful design",
+    "premium website",
+    "TypeScript"
+  ],
+  authors: [{ name: "MyWebsite Team" }],
+  creator: "MyWebsite",
+  publisher: "MyWebsite",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://mywebsite.com",
+    title: "MyWebsite - Modern Web Solutions",
+    description: "Discover amazing content and explore our beautiful, modern website built with Next.js and Tailwind CSS.",
+    siteName: "MyWebsite",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "MyWebsite - Modern Web Solutions",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MyWebsite - Modern Web Solutions",
+    description: "Discover amazing content and explore our beautiful, modern website built with Next.js and Tailwind CSS.",
+    images: ["/twitter-image.jpg"],
+    creator: "@mywebsite",
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  },
+  verification: {
+    google: "your-google-verification-code",
+    yandex: "your-yandex-verification-code",
+  },
+};
+
 export default function Home() {
   return (
     <div className="container mx-auto px-6 py-16">
