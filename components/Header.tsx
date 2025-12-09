@@ -21,6 +21,18 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -67,6 +79,22 @@ export default function Header() {
             </li>
             <li>
               <Link
+                href="/blog"
+                className="hover:text-pink-200 transition-colors duration-300 font-medium"
+              >
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/testimonials"
+                className="hover:text-pink-200 transition-colors duration-300 font-medium"
+              >
+                Testimonials
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/contact"
                 className="hover:text-pink-200 transition-colors duration-300 font-medium"
               >
@@ -78,7 +106,7 @@ export default function Header() {
           {/* Hamburger Icon */}
           <button
             onClick={toggleMenu}
-            className="md:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 focus:outline-none hover:opacity-80 transition-opacity"
+            className="md:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 focus:outline-none hover:opacity-80 transition-opacity relative z-[60]"
             aria-label="Toggle menu"
           >
             <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
@@ -90,17 +118,17 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 md:hidden ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        className={`fixed inset-0 bg-black bg-opacity-50 z-[60] transition-opacity duration-300 md:hidden ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}
         onClick={closeMenu}
       ></div>
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-indigo-700 via-purple-700 to-pink-700 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed top-0 left-0 h-screen w-64 bg-gradient-to-b from-indigo-700 via-purple-700 to-pink-700 shadow-2xl z-[70] transform transition-transform duration-300 ease-in-out md:hidden overflow-y-auto ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
       >
-        <div className="p-6">
+        <div className="p-6 min-h-full">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold">Menu</h2>
             <button
@@ -130,6 +158,24 @@ export default function Header() {
                 onClick={closeMenu}
               >
                 About
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/blog"
+                className="block text-lg font-medium hover:text-pink-200 transition-colors duration-300"
+                onClick={closeMenu}
+              >
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/testimonials"
+                className="block text-lg font-medium hover:text-pink-200 transition-colors duration-300"
+                onClick={closeMenu}
+              >
+                Testimonials
               </Link>
             </li>
             <li>
