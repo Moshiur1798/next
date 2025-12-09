@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for each blog post
 export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
-    const blog = blogs.find((b) => b.slug === params.slug);
+    const { slug } = await params;
+    const blog = blogs.find((b) => b.slug === slug);
 
     if (!blog) {
         return {
@@ -59,8 +60,9 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
     };
 }
 
-export default function BlogDetailPage({ params }: BlogDetailPageProps) {
-    const blog = blogs.find((b) => b.slug === params.slug);
+export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
+    const { slug } = await params;
+    const blog = blogs.find((b) => b.slug === slug);
 
     if (!blog) {
         notFound();
@@ -72,7 +74,7 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
         .slice(0, 3);
 
     // Format date
-    const formattedDate = new Date(blog.date).toLocaleDateString("en_US", {
+    const formattedDate = new Date(blog.date).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -124,7 +126,7 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
                                 <span className="text-white/80 text-sm">•</span>
                                 <span className="text-white/80 text-sm">{blog.readTime}</span>
                             </div>
-                            <h1 className="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
+                            <h1 className="text-5xl md:text-3xl font-black text-white mb-6 leading-tight">
                                 {blog.title}
                             </h1>
                             <p className="text-xl text-white/90 mb-8">
